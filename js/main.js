@@ -1,7 +1,9 @@
 /*-- Initialization function --*/
 function init() {
   //define map object & link to placeholder div:
-  navMap = new ol.Map({target: "map_container"});
+  navMap = new ol.Map({
+    controls: ol.control.defaults().extend([new ol.control.FullScreen()]),
+    target: "map_container"});
   // define layer as tiled map:
   osmLayer = new ol.layer.Tile({
       // load OSM (a connector predefined in the API) as source:
@@ -21,11 +23,11 @@ function init() {
 
   navMap.addControl(new ol.control.Zoom());
 
-  navMap.addControl(new ol.control.MousePosition({
-      projection: 'EPSG:4326',  
-      coordinateFormat: ol.coordinate.createStringXY(4)
-  })
-  );
+  // navMap.addControl(new ol.control.MousePosition({
+  //     projection: 'EPSG:4326',  
+  //     coordinateFormat: ol.coordinate.createStringXY(4)
+  // })
+  // );
   //   navMap.addControl(new ol.control.MousePosition());
 
   // change_map(CountryName)
