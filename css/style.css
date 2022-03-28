@@ -1108,6 +1108,7 @@ h6 {
 #products .card .card-block {
   padding-top: 0;
   text-align: center;
+  margin:2%
 }
 
 #products .card .list-group-item {
@@ -1706,6 +1707,3 @@ h6 {
   }
 }
 
-#map_container{
-  padding:5%;
-}
