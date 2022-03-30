@@ -1,0 +1,69 @@
+# [NETPATH] = d:/iishome/student/s2516306/thailand
+# [CGIPATH] = https://gisedu.itc.utwente.nl/cgi-bin/mapserv.exe
+# [URLPATH] = https://gisedu.itc.utwente.nl/student/s2516306/thailand
+
+MAP
+    NAME "Enschede"
+    IMAGECOLOR 255 255 255
+    SIZE 600 800
+    IMAGETYPE PNG24
+    PROJECTION
+        "init=epsg:28992" #latlon on WGS84
+    END #default projection
+    EXTENT 256949.3665611869946588 470721.1748565000016242 257713.3665611869946588 471875.1748565000016242 # lon/lat extents of Thailand
+    WEB
+        METADATA
+            "ows_enable_request" "*"
+            "map" "d:/iishome/student/s2516306/thailand/configWMS.map"
+            "ows_schemas_location" "http://schemas.opengeospatial.net"
+            "ows_title" "EnschedeDTM"
+            # "ows_onlineresource" "https://gisedu.itc.utwente.nl/cgi-bin/mapserv.exe?map=d:/iishome/student/s2516306/thailand/configWMS.map&"
+            "ows_onlineresource" "127.0.0.1/cgi-bin/mapserv.exe?map=d:/iishome/student/s2516306/thailand/configWMS.map&"
+            "ows_srs" "EPSG:28992" #latlon
+            "wms_feature_info_mime_type" "text/plain"
+            "wms_feature_info_mime_type" "text/html"
+            "wms_server_version" "1.3.0"
+            "wms_formatlist" "image/png,image/gif,image/jpeg"
+            "wms_format" "image/png"
+        END #web metadata
+    END #web
+    LAYER
+        NAME "DTM"
+        TYPE RASTER
+        STATUS ON
+        #CONNECTIONTYPE postgis
+        #CONNECTION "user=exercises password=exercises dbname=exercises host=gisedu.itc.utwente.nl port=5432 options='-c client_encoding=UTF8'"
+        DATA "../../dtm_output/dtm.tif"
+        CLASSITEM "[pixel]"
+        # class using simple string comparison, equivalent to ([pixel] = 0)
+        # CLASS
+        #     EXPRESSION "0"
+        #     STYLE
+        #     COLOR 0 0 0
+        #     END
+        # END
+        # class using an EXPRESSION using only [pixel].
+        # CLASS
+        #     EXPRESSION ([pixel] >= 64 AND [pixel] < 128)
+        #     STYLE
+        #     COLOR 255 0 0
+        #     END
+        # END
+        # class using the red/green/blue values from the palette
+        # CLASS
+        #     NAME "near white"
+        #     EXPRESSION ([red] > 200 AND [green] > 200 AND [blue] > 200)
+        #     STYLE
+        #     COLOR 0 255 0
+        #     END
+        # END
+        # Class using a regular expression to capture only pixel values ending in 1
+        # CLASS
+        #     EXPRESSION /*1*/
+        #     STYLE
+        #     COLOR 0 0 255
+        #     END
+        # END
+    END 
+    
+END #map
